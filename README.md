@@ -49,7 +49,7 @@ All of this is done without ever binding cameras to configuration templates, whi
 
 ## How to Use
 
-1. Clone repo to your working directory with `git clone https://github.com/Francisco-1088/merakiSwitchProfiler.git`
+1. Clone repo to your working directory with `git clone https://github.com/Francisco-1088/merakiCamProfiler.git`
 2. Edit `config.py`
 * Add your API Key under `api_key` in line 2
 * Add the Organization ID of the organization where the source network exists. You can find your Org ID easily by right clicking anywhere in the screen while logged in to your organization, and clicking "View Page Source". In the resulting page use "Find" to look for the keyword `Mkiconf.org_id`
