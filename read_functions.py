@@ -155,18 +155,13 @@ async def gather_camera_specific_data(aiomeraki):
 
 async def gather_template_network_data(aiomeraki):
     """
-    Gathers the information necessary to propagate switch configs from the source template specified in the config.py
+    Gathers the information necessary to propagate switch configs from the source network specified in the config.py
     file.
     :param aiomeraki: asyncio instance of the Dashboard API client with access to the source and target organizations,
     as well as the source configuration templates
-    :returns: src_acl_config: ACL Config in source template
-              src_qos_config: QoS Config in source template
-              src_qos_order_config: Order of QoS rules in source template
-              src_group_policies: Group Policies in source template
-              src_network_alerts: Network Alerts in source template
-              src_syslog_config: Syslog Config in source template
-              src_snmp_config: SNMP Config in source template
-              src_net_analytics: Network Analytics Config in source template
+    :returns: src_quality_profiles: List of quality profiles in the source network
+              src_wireless_profiles: List of wireless profiles in the source network
+              src_camera_alerts: List of alerts in the source network
     """
     # Network attributes to be obtained from template
     get_tasks = [
