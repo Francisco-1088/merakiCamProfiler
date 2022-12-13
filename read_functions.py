@@ -120,7 +120,7 @@ async def gather_camera_specific_data(aiomeraki):
     # Obtain src_quality_profiles, src_wireless_profiles and src_camera_alerts
     src_quality_profiles, src_wireless_profiles, src_camera_alerts = await gather_template_network_data(aiomeraki)
 
-    # Obtain set of networks those MS devices are mapped to
+    # Obtain set of networks those MV devices are mapped to
     device_nets = [*set(d['networkId'] for d in org_devices)]
 
     # Construct a set of the network IDs of said networks
