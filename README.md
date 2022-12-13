@@ -71,8 +71,9 @@ All of this is done without ever binding cameras to configuration templates, whi
 ![image alt text](images/network_tag.png)
 
 5. [Tag cameras](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Organization_Menu/Manage_Tags#Creating_Device_tags) you want to copy quality and wireless profiles to with the same tag you defined in `config.py` under `dst_camera_tag`
-6. Tag some of these same cameras with one additonal tag that has the same `qp-X` prefix that your desired quality profile for this camera has. For example, if your source network has a quality profile named `qp-1-highdef`, any cameras you want with this quality profile should carry the `qp-1` tag.
-7. Tag some these same cameras with one additonal tag that has the `wp-X-Y-Z` format, where X, Y and Z are integers that identify a wireless profile number and their priority order, and where -Z is optional, but -X-Y are mandatory. For example, if you have 3 wireless profiles `wp-1-psk`, `wp-2-eap`, `wp-3-psk2`, and a camera that needs to use `wp-2-eap` as primary, `wp-1-psk` as secondary and `wp-3-psk`, then this tag should have `wp-2-1-3`.
+6. OPTIONAL: You may use the provided `camTagger.py` and `cameras.csv` files to automatically tag your cameras. You have to modify the sample CSV with your own camera serials and the tags you wish to assign to them separated by commas as a string. You then execute this script with `python camTagger.py`
+7. Tag some of these same cameras with one additonal tag that has the same `qp-X` prefix that your desired quality profile for this camera has. For example, if your source network has a quality profile named `qp-1-highdef`, any cameras you want with this quality profile should carry the `qp-1` tag.
+8. Tag some these same cameras with one additonal tag that has the `wp-X-Y-Z` format, where X, Y and Z are integers that identify a wireless profile number and their priority order, and where -Z is optional, but -X-Y are mandatory. For example, if you have 3 wireless profiles `wp-1-psk`, `wp-2-eap`, `wp-3-psk2`, and a camera that needs to use `wp-2-eap` as primary, `wp-1-psk` as secondary and `wp-3-psk`, then this tag should have `wp-2-1-3`.
 
 ![image alt text](images/device_tag.png)
 
@@ -84,9 +85,9 @@ NOTE: Quality Profiles and Wireless Profiles have the following restrictions:
 * A camera MUST ONLY have a single tag with the format `wp-X-Y` or `wp-X-Y-Z`. The tag MUST reference at least two wireless profiles, and optionally a third, but never more than 3, so `wp-1-2` and `wp-2-3-1` are acceptable tags, but not `wp-1-3-4-2`
 * Quality profile and Wireless profile tags are optional, and only cameras with the `camProfiler` tag will be considered, so even if a camera has a `qp-X` or `wp-X-Y-Z` tag, but doesn't have the `camProfiler` tag, that camera will not be operated on
 
-8. Tag some these same cameras with your chosen `rtsp_enabled_tag` (`rtsp` by default). These cameras will have RTSP turned on for them by the script.
+9. Tag some these same cameras with your chosen `rtsp_enabled_tag` (`rtsp` by default). These cameras will have RTSP turned on for them by the script.
 
-9. Run the script with `python main.py`
+10. Run the script with `python main.py`
 
 **Note:** If using the `supervised=True` configuration in the `config.py` file, every time the script will apply configuration changes it will prompt you to accept whether you want to continue or not. The prompt ONLY accepts `Y` for continuing, or `N` for skipping, and it is cap-sensitive. Any other input will break execution. A `N` will return execution to the script before calling the function with the exception of Quality Profiles and Wireless Profiles. If you choose to skip either of these, the script will also break execution, as not creating these will cause problems when attempting to update Camera configurations.
 
